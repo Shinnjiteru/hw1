@@ -1,0 +1,129 @@
+灰度递减：
+clear;
+figure=imread('lena.bmp');
+[x,y]=size(figure);
+a=8;
+while a>=1
+    subplot(2,4,9-a)
+    imshow((figure),[0,2^a-1]);
+    title(a)
+    figure=fig(x,y,figure);
+    a=a-1;
+end
+function figure=fig(x,y,I)
+figure=zeros(x,y);
+    for i=1:x
+        for j=1:y
+            figure(i,j)=floor(I(i,j)/2);
+        end
+    end
+end
+
+
+均值方差：
+clear;
+figure=imread('lena.bmp');
+x=mean2(figure);
+s2=std2(figure);
+fprintf('均值:%f\n方差:%f\n',x,s2)
+
+
+内插缩放：
+clear;
+figure=imread('lena.bmp');
+figA=imresize(figure,[2048,2048],'nearest');
+figB=imresize(figure,[2048,2048],'bilinear');
+figC=imresize(figure,[2048,2048],'bicubic');
+subplot(2,2,1);
+imshow(figure);
+title('origin');
+subplot(2,2,2);
+imshow(figA);
+title('nearest');
+subplot(2,2,3);
+imshow(figB);
+title('bilinear');
+subplot(2,2,4);
+imshow(figC);
+title('bicubic')
+
+
+偏移缩放：
+clear;
+fig1=imread('lena.bmp');
+fig2=imread('elain1.bmp');
+T=[1 1.5 0;0 1 0;0 0 1];
+trans=maketform('affine',T);
+fig1_0=imtransform(fig1,trans);
+fig1_A=imresize(fig1_0,[2048 2048],'nearest');
+fig1_B=imresize(fig1_0,[2048 2048],'bilinear');
+fig1_C=imresize(fig1_0,[2048 2048],'bicubic');
+fig2_0=imtransform(fig2,trans);
+fig2_A=imresize(fig2_0,[2048 2048],'nearest');
+fig2_B=imresize(fig2_0,[2048 2048],'bilinear');
+fig2_C=imresize(fig2_0,[2048 2048],'bicubic');
+subplot(2,4,1);
+imshow(fig1);
+title('lena origin');
+subplot(2,4,2);
+imshow(fig1_A);
+title('lena neareat');
+subplot(2,4,3);
+imshow(fig1_B);
+title('lena bilinear');
+subplot(2,4,4);
+imshow(fig1_C);
+title('lena bicubic');
+subplot(2,4,5);
+imshow(fig2);
+title('elain1 origin');
+subplot(2,4,6);
+imshow(fig2_A);
+title('elain1 neareat');
+subplot(2,4,7);
+imshow(fig2_B);
+title('elain1 bilinear');
+subplot(2,4,8);
+imshow(fig2_C);
+title('elain1 bicubic')
+
+
+旋转缩放：
+clear;
+fig1=imread('lena.bmp');
+fig2=imread('elain1.bmp');
+T=[cosd(30) sind(30) 0;-sind(30) cos(30) 0;0 0 1];
+trans=maketform('affine',T);
+fig1_0=imtransform(fig1,trans);
+fig1_A=imresize(fig1_0,[2048 2048],'nearest');
+fig1_B=imresize(fig1_0,[2048 2048],'bilinear');
+fig1_C=imresize(fig1_0,[2048 2048],'bicubic');
+fig2_0=imtransform(fig2,trans);
+fig2_A=imresize(fig2_0,[2048 2048],'nearest');
+fig2_B=imresize(fig2_0,[2048 2048],'bilinear');
+fig2_C=imresize(fig2_0,[2048 2048],'bicubic');
+subplot(2,4,1);
+imshow(fig1);
+title('lena origin');
+subplot(2,4,2);
+imshow(fig1_A);
+title('lena neareat');
+subplot(2,4,3);
+imshow(fig1_B);
+title('lena bilinear');
+subplot(2,4,4);
+imshow(fig1_C);
+title('lena bicubic');
+subplot(2,4,5);
+imshow(fig2);
+title('elain1 origin');
+subplot(2,4,6);
+imshow(fig2_A);
+title('elain1 neareat');
+subplot(2,4,7);
+imshow(fig2_B);
+title('elain1 bilinear');
+subplot(2,4,8);
+imshow(fig2_C);
+title('elain1 bicubic')
+
